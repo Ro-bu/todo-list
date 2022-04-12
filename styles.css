@@ -1,0 +1,169 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+html {
+ font-size: 18px;
+}
+
+
+.main-content{
+    display: grid;
+    grid-template-rows: 70px 1fr;
+    grid-template-columns: 300px 1fr;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Raleway', sans-serif;
+}
+.header{
+    background-color: #8a817c;
+    grid-row: 1/2;
+    grid-column: 1/3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 50px;
+}
+.logo-block{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    gap: 10px;
+    color: white;
+    font-weight: 600;
+}
+.user-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+}
+.user-block button{
+    border: none;
+    background-color: #e36414;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 15px;
+    padding: 5px 15px;
+}
+.sidebar{
+    background-color: #e4e0d9;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+    color: #463f3a;
+    box-sizing: border-box;
+    padding: 50px 30px 50px 50px;
+}
+.sidebar-top ul{
+    font-size: 1.4rem;
+    font-weight: 400;
+    display:  flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 5px;
+}
+.sidebar-top li{
+    padding: 5px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.sidebar-top li:hover{
+    background-color: #f0ede8;
+    border-radius: 10px;
+}
+.sidebar-top li:last-child{
+    position: relative;
+}
+
+.sidebar-top li:last-child::after{
+    display: inline-block;
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 25%;
+    width: 1rem;
+    height: 1rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+
+}
+.project-container{
+    font-size: 1rem;
+    border-left: 1px solid #463f3a;
+    margin-left: 45px;
+    padding: 5px 0;
+}
+.project-container ul{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    gap: 5px;
+}
+.project-container li{
+    padding: 5px 10px;
+}
+.project-container li:hover{
+    background-color: #f0ede8;
+    border-radius: 10px;
+}
+.list-content{
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
