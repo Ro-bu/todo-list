@@ -60,7 +60,7 @@ html {
     font-family: 'Raleway', sans-serif;
 }
 .header{
-    background-color: #8a817c;
+    background-color: #1d3557;
     grid-row: 1/2;
     grid-column: 1/3;
     display: flex;
@@ -69,6 +69,8 @@ html {
     align-items: center;
     box-sizing: border-box;
     padding: 0 50px;
+    box-shadow: 0px 0px 2px 2px #b3b3b3;
+    z-index: 2;
 }
 .logo-block{
     display: flex;
@@ -97,6 +99,9 @@ html {
     color: white;
     border-radius: 15px;
     padding: 5px 15px;
+}
+.user-block button:hover{
+    background-color: #e9742b;
 }
 .sidebar{
     background-color: #e4e0d9;
@@ -142,14 +147,22 @@ html {
     width: 1rem;
     height: 1rem;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-
+}
+.rotate-arrow::after{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    transform: rotateX(180deg);
 }
 .project-container{
     font-size: 1rem;
     border-left: 1px solid #463f3a;
     margin-left: 45px;
-    padding: 5px 0;
+
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    box-sizing: border-box;
 }
+
 .project-container ul{
     display: flex;
     flex-direction: column;
@@ -157,11 +170,27 @@ html {
     gap: 5px;
 }
 .project-container li{
-    padding: 5px 10px;
+    padding: 5px 10px 5px 30px;
+    cursor: pointer;
+    position: relative;
 }
 .project-container li:hover{
     background-color: #f0ede8;
     border-radius: 10px;
+}
+.project-container li::before{
+    display: inline-block;
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 27%;
+    width: 0.7rem;
+    height: 0.7rem;
+    background-color: #463f3a;
+    border-radius: 50%;
+}
+.invisible{
+    display: none;
 }
 .list-content{
     grid-row: 2/3;
