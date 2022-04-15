@@ -32,6 +32,7 @@
                             </svg>
                         </span>
                         <span>ALL</span>
+                        <span class="task-counter" id="all-counter">(0)</span>
                     </li>
                     <li>
                         <span>
@@ -40,6 +41,7 @@
                             </svg>
                         </span>
                     <span>TODAY</span>
+                    <span class="task-counter" id="today-counter">(0)</span>
                     </li>
                     <li>
                         <span>
@@ -48,6 +50,7 @@
                             </svg>
                         </span>
                         <span>WEEK</span>
+                        <span class="task-counter" id="week-counter">(0)</span>
                     </li>
                     <li>
                         <span>
@@ -62,19 +65,86 @@
             <div class="project-container">
                 <ul>
                     <li>
-                        GYM
+                        <span>GYM</span>
+                        <span>(0)</span>
                     </li>
                     <li>
-                        WORK
+                        <span>WORK</span>
+                        <span>(0)</span>
                     </li>
                     <li>
-                        CHORES
+                        <span>CHORES</span>
+                        <span>(0)</span>
                     </li>
                 </ul>
+                <div class="add-project">
+                    <span>+</span>
+                    <span>ADD PROJECT</span>
+                </div>
             </div>
         </div>
         <div class="list-content">
-            
+            <div class="top-content-block">
+                <h2 class="list-name">ALL</h2>
+                <span>Edit</span>
+            </div>
+            <div class="bot-content-block">
+                <div class="add-task"><span>+</span> ADD TASK</div>
+                <ul>
+                    <li>
+                        <div class="task-and-checkbox">
+                            <div class="checkbox">
+                                
+                            </div>
+                            <div class="task-name">
+                                Throw Jenko a birthday party
+                            </div>
+                        </div>
+                        <div class="date-and-edit">
+                            <div class="date">
+                                07/07/22
+                            </div>
+                            <span>
+                                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                                    <path fill="#463f3a" d="M11 20.1L19.2 11.9C19.7 11.4 20.3 11.1 21 11.1C21.7 11.1 22.3 11.4 22.8 11.9L23 12.1V4C23 2.9 22.1 2 21 2H3C1.9 2 1 2.9 1 4V20C1 21.1 1.9 22 3 22H11V20.1M3 4H21V7H3V4M21 13.1C20.9 13.1 20.7 13.2 20.6 13.3L19.6 14.3L21.7 16.4L22.7 15.4C22.9 15.2 22.9 14.8 22.7 14.6L21.4 13.3C21.3 13.2 21.2 13.1 21 13.1M19.1 14.9L13 20.9V23H15.1L21.2 16.9L19.1 14.9Z" />
+                                </svg>
+                            </span>
+                            <span>
+                                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                                    <path fill="#463f3a" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                                </svg>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="task-and-checkbox">
+                            <div class="checkbox checked">
+                                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                                    <path fill="white" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
+                                </svg>
+                            </div>
+                            <div class="task-name">
+                                Eat great sushi
+                            </div>
+                        </div>
+                        <div class="date-and-edit">
+                            <div class="date">
+                                07/07/22
+                            </div>
+                            <span>
+                                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                                    <path fill="#463f3a" d="M11 20.1L19.2 11.9C19.7 11.4 20.3 11.1 21 11.1C21.7 11.1 22.3 11.4 22.8 11.9L23 12.1V4C23 2.9 22.1 2 21 2H3C1.9 2 1 2.9 1 4V20C1 21.1 1.9 22 3 22H11V20.1M3 4H21V7H3V4M21 13.1C20.9 13.1 20.7 13.2 20.6 13.3L19.6 14.3L21.7 16.4L22.7 15.4C22.9 15.2 22.9 14.8 22.7 14.6L21.4 13.3C21.3 13.2 21.2 13.1 21 13.1M19.1 14.9L13 20.9V23H15.1L21.2 16.9L19.1 14.9Z" />
+                                </svg>
+                            </span>
+                            <span>
+                                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                                    <path fill="#463f3a" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                                </svg>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>

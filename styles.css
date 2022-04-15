@@ -111,7 +111,7 @@ html {
     flex-direction: column;
     color: #463f3a;
     box-sizing: border-box;
-    padding: 50px 30px 50px 50px;
+    padding: 50px 30px 50px 30px;
 }
 .sidebar-top ul{
     font-size: 1.4rem;
@@ -126,7 +126,7 @@ html {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     padding-left: 10px;
     cursor: pointer;
 }
@@ -137,7 +137,13 @@ html {
 .sidebar-top li:last-child{
     position: relative;
 }
-
+.sidebar-top li span:first-child{
+    padding-right: 5px;
+}
+.task-counter{
+    color:#6d6660;
+    font-size: 1rem;
+}
 .sidebar-top li:last-child::after{
     display: inline-block;
     content: "";
@@ -174,6 +180,10 @@ html {
     cursor: pointer;
     position: relative;
 }
+.project-container li span:last-child{
+    color:#6d6660;
+    font-size: 0.8rem;
+}
 .project-container li:hover{
     background-color: #f0ede8;
     border-radius: 10px;
@@ -189,10 +199,97 @@ html {
     background-color: #463f3a;
     border-radius: 50%;
 }
+.add-project{
+    padding: 2px 0 2px 0;
+    cursor: pointer;
+    margin: 5px 0 5px 10px;
+    display: flex;
+    align-items: center;
+}
+.add-project span:first-child{
+    font-size: 1.5rem;
+    margin: 0 15px 0 5px;
+}
+.add-project:hover{
+    background-color: #f0ede8;
+    border-radius: 10px;
+}
 .invisible{
     display: none;
 }
 .list-content{
     grid-row: 2/3;
     grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1.5rem 2rem 2rem 2rem;
+}
+.top-content-block{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #463f3a;
+    padding: 0.5rem;
+    align-items: center;
+}
+.top-content-block h2{
+    font-size: 2rem;
+    color: #463f3a;
+    font-weight: 600;
+}
+.top-content-block span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.add-task{
+    margin: 1rem 0 1rem 0;
+    cursor: pointer;
+}
+.add-task:hover{
+    text-decoration: underline;
+}
+.bot-content-block ul{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.bot-content-block ul li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #f8f5ef;
+    border-radius: 25px;
+    border: 1px solid #e4dbd4;
+    padding: 5px 20px 5px 20px;
+}
+.task-and-checkbox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+}
+.checkbox{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid #463f3a;
+    background-color: white;
+}
+.checked{
+    background-color: #52b788;
+}
+.checkbox:hover{
+    border: 1px solid #e4dbd4;
+}
+.task-name{
+    font-size: 1.2rem;
+}
+.date-and-edit{
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.date-and-edit span{
+    cursor: pointer;
+
 }

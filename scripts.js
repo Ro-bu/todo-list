@@ -1,11 +1,5 @@
-// title
-// description
-// date
-// project
-// color
-
-const taskFactory = (title, description, date, project, subproject, color) => {
-    return {title, description, date, project, subproject, color};
+const taskFactory = (title, description, date, project, color, checked) => {
+    return {title, description, date, project, color, checked};
 };
 const projectFactory = (name, color) => {
     return{name, color};
