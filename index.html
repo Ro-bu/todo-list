@@ -12,6 +12,65 @@
 </head>
 <body>
     <div class="main-content">
+        <div class="modal" id="project-modal">
+            <div class="modal-content">
+                <div class="modal-top">
+                    <span>ADD PROJECT</span>
+                    <span>x</span>
+                </div>
+                <form name="projectModal" action="#">
+                        <div class="modal-input">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="error-message" id="project-name-error">
+                                Please fill in the project name
+                            </div>
+                        </div>
+                        <div class="modal-input">
+                            <div class="color-input">
+                                <label for="color">Color:</label>
+                                <input type="color" id="color" name="color" value="#a2d2ff">
+                            </div>
+                        </div>
+                    <div class="button-row">
+                        <button class="cancel-button" id="project-form-cancel">Cancel</button>
+                        <button class="submit-button" id="project-form-submit">Add Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal" id="task-modal">
+            <div class="modal-content">
+                <div class="modal-top">
+                    <span>ADD TASK</span>
+                    <span>x</span>
+                </div>
+                <form name="taskModal" action="#">
+                    <div class="modal-input">
+                        <label for="task">Task:</label>
+                        <input type="text" id="task" name="task" required>
+                        <div class="error-message" id="task-error">
+                                
+                        </div>
+                    </div>
+                    <div class="modal-input">
+                        <label for="dueDate">Due date:</label>
+                        <input type="text" id="dueDate" name="dueDate" required>
+                        <div class="error-message" id="due-date-error">
+                                
+                        </div>
+                    </div>
+                    <div class="modal-input">
+                        <label for="project">Project:</label>
+                        <input type="text" id="project" name="project" required>
+                    </div>
+                    <div class="button-row">
+                        <button class="cancel-button" id="task-form-cancel">Cancel</button>
+                        <button class="submit-button" id="uask-form-submit">Add Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="header">
             <div class="logo-block">
                 <img src="./img/check.png">
