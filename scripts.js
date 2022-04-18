@@ -1,11 +1,21 @@
 let projectArray = [{
-    name: "Janus",
+    name: "pervo",
     color: "#e9b96e"
 }, {
-    name: "dfsdfnus",
+    name: "cummies",
     color: "#8ae234"
 }];
-let taskArray = [{title: "get gud", dueDate: "01/02/03254", project: "cummies", done: false}];
+let taskArray = [{
+    title: "get gud",
+    dueDate: "01/02/25",
+    project: "cummies",
+    done: false
+}, {
+    title: "snowies",
+    dueDate: "52/06/23",
+    project: "pervo",
+    done: false
+}];
 let finishedTasks = [];
 const taskModal = document.querySelector("#task-modal");
 
@@ -116,7 +126,7 @@ const addTasktoUi = (obj) => {
     taskAndCheckboxDiv.classList.add("task-and-checkbox");
     let checkboxDiv = document.createElement("div");
     checkboxDiv.classList.add("checkbox");
-    if(obj.done === true){
+    if (obj.done === true) {
         checkboxDiv.classList.add("checked");
     };
     let taskNameDiv = document.createElement("div");
@@ -143,4 +153,14 @@ const addTasktoUi = (obj) => {
     dateAndEditDiv.appendChild(editButton);
     dateAndEditDiv.appendChild(trashButton);
     document.querySelector(".bot-content-block ul").appendChild(parentLi);
+};
+
+const projectsToFormOptions = () => {
+    let selectParent = document.querySelector("#project");
+    for (const project of projectArray) {
+        let newOption = document.createElement("option");
+        newOption.value = project.name;
+        newOption.text = project.name;
+        selectParent.appendChild(newOption);
+    };
 };

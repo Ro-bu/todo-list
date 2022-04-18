@@ -342,8 +342,8 @@ html {
     flex-direction: column;
     flex: 0 0 50%;
 }
-.modal-input input{
-    margin-top: 0.5rem;
+.modal-input label{
+    margin-bottom: 0.5rem;
 }
 form[name="projectModal"] .modal-input:last-child{
     display: flex;
