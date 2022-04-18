@@ -176,24 +176,23 @@ html {
     gap: 5px;
 }
 .project-container li{
-    padding: 5px 10px 5px 30px;
+    padding: 5px 10px 5px 5px;
     cursor: pointer;
-    position: relative;
 }
-.project-container li span:last-child{
+.project-container ul li span{
+    margin-left: 0.8rem;
+}
+.project-container ul li span:last-child{
     color:#6d6660;
     font-size: 0.8rem;
+    margin-left: 0.3rem;
 }
 .project-container li:hover{
     background-color: #f0ede8;
     border-radius: 10px;
 }
-.project-container li::before{
+.project-container ul li div{
     display: inline-block;
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 27%;
     width: 0.7rem;
     height: 0.7rem;
     background-color: #463f3a;
