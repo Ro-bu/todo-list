@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-do list</title>
-    <script src="scripts.js" defer></script>
+    <script src="main.js" defer></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,6 @@
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required>
                             <div class="error-message" id="project-name-error">
-                                Please fill in the project name
                             </div>
                         </div>
                         <div class="modal-input">
@@ -55,7 +54,7 @@
                     </div>
                     <div class="modal-input">
                         <label for="dueDate">Due date:</label>
-                        <input type="text" id="dueDate" name="dueDate" required>
+                        <input type="date" id="dueDate" name="dueDate" required>
                         <div class="error-message" id="due-date-error">
                                 
                         </div>
@@ -63,12 +62,14 @@
                     <div class="modal-input">
                         <label for="project">Project:</label>
                         <select id="project" name="project" required>
-                            <option value="none" select="selected">none</option>
                         </select>
+                        <div class="error-message" id="project-error">
+                                
+                        </div>
                     </div>
                     <div class="button-row">
                         <button class="cancel-button" id="task-form-cancel">Cancel</button>
-                        <button class="submit-button" id="uask-form-submit">Add Task</button>
+                        <button class="submit-button" id="task-form-submit">Add Task</button>
                     </div>
                 </form>
             </div>
@@ -156,47 +157,57 @@
                 <div class="add-task"><span>+</span> ADD TASK</div>
                 <ul>
                     <li>
-                        <div class="task-and-checkbox">
-                            <div class="checkbox">
+                        <div class="color-block">
                                 
-                            </div>
-                            <div class="task-name">
-                                Throw Jenko a birthday party
-                            </div>
                         </div>
-                        <div class="date-and-edit">
-                            <div class="date">
-                                07/07/22
+                        <div class="task-container">
+                            <div class="task-and-checkbox">
+                                <div class="checkbox">
+                                    
+                                </div>
+                                <div class="task-name">
+                                    Throw Jenko a birthday party
+                                </div>
                             </div>
-                            <span>
-                                <img src="./img/credit-card-edit.png" alt="edit" id="edit-task">
-                            </span>
-                            <span>
-                                <img src="./img/delete.png" alt="delete task" id="delete-task">
-                            </span>
+                            <div class="date-and-edit">
+                                <div class="date">
+                                    07/07/22
+                                </div>
+                                <span>
+                                    <img src="./img/credit-card-edit.png" alt="edit" id="edit-task">
+                                </span>
+                                <span>
+                                    <img src="./img/delete.png" alt="delete task" id="delete-task">
+                                </span>
+                            </div>
                         </div>
                     </li>
                     <li>
-                        <div class="task-and-checkbox">
-                            <div class="checkbox checked">
-                                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
-                                    <path fill="white" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                                </svg>
-                            </div>
-                            <div class="task-name">
-                                Eat great sushi
-                            </div>
+                        <div class="color-block">
+                                
                         </div>
-                        <div class="date-and-edit">
-                            <div class="date">
-                                07/07/22
+                        <div class="task-container">
+                            <div class="task-and-checkbox">
+                                <div class="checkbox checked">
+                                    <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                                        <path fill="white" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
+                                    </svg>
+                                </div>
+                                <div class="task-name">
+                                    Eat great sushi
+                                </div>
                             </div>
-                            <span>
-                                <img src="./img/credit-card-edit.png" alt="edit" id="edit-task">
-                            </span>
-                            <span>
-                                <img src="./img/delete.png" alt="delete task" id="delete-task">
-                            </span>
+                            <div class="date-and-edit">
+                                <div class="date">
+                                    07/07/22
+                                </div>
+                                <span>
+                                    <img src="./img/credit-card-edit.png" alt="edit" id="edit-task">
+                                </span>
+                                <span>
+                                    <img src="./img/delete.png" alt="delete task" id="delete-task">
+                                </span>
+                            </div>
                         </div>
                     </li>
                 </ul>

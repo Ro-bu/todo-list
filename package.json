@@ -1,0 +1,27 @@
+{
+  "name": "todo-lis",
+  "version": "1.0.0",
+  "description": "to do list app",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ro-bu/todo-list.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ro-bu/todo-list/issues"
+  },
+  "homepage": "https://github.com/Ro-bu/todo-list#readme",
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "date-fns": "^2.28.0"
+  }
+}
