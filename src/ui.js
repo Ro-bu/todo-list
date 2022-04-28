@@ -1,3 +1,5 @@
+import {Storage} from "./storage.js"
+
 const addProjectToUi = (obj) => {
     let parentLi = document.createElement("li");
     let nameContainer = document.createElement("span");
@@ -10,6 +12,15 @@ const addProjectToUi = (obj) => {
     parentLi.appendChild(nameContainer);
     parentLi.appendChild(taskCounter);
     document.querySelector(".project-container ul").appendChild(parentLi);
+};
+
+const addAllProjectsToUi = () => {
+    if (Storage.getData() !== null) {
+        let projectArray = Storage.getData();
+        projectArray.forEach((project) => {
+            addProjectToUi(project);
+        });
+    };
 };
 
 const addTasktoUi = (obj) => {
@@ -45,4 +56,18 @@ const addTasktoUi = (obj) => {
     dateAndEditDiv.appendChild(editButton);
     dateAndEditDiv.appendChild(trashButton);
     document.querySelector(".bot-content-block ul").appendChild(parentLi);
+};
+
+const clearTasks = () => {
+    let tasksParent = document.querySelector(".bot-content-block ul");
+    while (tasksParent.firstChild) {
+        tasksParent.removeChild(tasksParent.lastChild);
+    };
+};
+
+const clearProjects = () => {
+    let projectsParent = document.querySelector(".project-container ul");
+    while (projectsParent.firstChild) {
+        projectsParent.removeChild(projectsParent.lastChild);
+    };
 };

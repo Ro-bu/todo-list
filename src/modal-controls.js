@@ -1,7 +1,6 @@
 import {Task, Project} from "./factories.js"
 import {validateProjectForm, validateTaskForm, clearErrorMessages} from "./form-validators.js"
-
-let projectArray = [];
+import {Storage} from "./storage.js"
 
 const closeProjectModal = () => {
     document.querySelector("#project-modal").style.display = "none";
@@ -28,7 +27,16 @@ const modalToProject = () => {
 };
 const projectToArray = () => {
     let newProject = modalToProject();
-    projectArray.push(newProject);
+    if (Storage.getData() === null){
+        let projectArray = [];
+        projectArray.push(newProject);
+        Storage.saveData(projectArray);
+    } else {
+        let projectArray = Storage.getData();
+        projectArray.push(newProject);
+        Storage.saveData(projectArray);
+    }
+
 };
 const modalToTask = () => {
     let title = document.querySelector("#task").value;
@@ -38,11 +46,13 @@ const modalToTask = () => {
 const taskToArray = () => {
     let newTask = modalToTask();
     let projectName = document.querySelector("#project").value;
+    let projectArray = Storage.getData();
     projectArray.forEach((project) => {
         if(project.name === projectName){
             project.tasks.push(newTask);
         };
     });
+    Storage.saveData(projectArray);
 };
 const clearFormOptions = () => {
     let parent = document.querySelector("#project");
@@ -52,11 +62,14 @@ const clearFormOptions = () => {
 };
 const projectsToFormOptions = () => {
     let selectParent = document.querySelector("#project");
-    for (const project of projectArray) {
-        let newOption = document.createElement("option");
-        newOption.value = project.name;
-        newOption.text = project.name;
-        selectParent.appendChild(newOption);
+    if (Storage.getData() !== null){
+        let projectArray = Storage.getData();
+            for (const project of projectArray) {
+                let newOption = document.createElement("option");
+                newOption.value = project.name;
+                newOption.text = project.name;
+                selectParent.appendChild(newOption);
+        };
     };
 };
 const modalListeners = () => {
@@ -82,12 +95,14 @@ const modalListeners = () => {
     document.querySelector("#project-form-submit").addEventListener("click", (e) => {
         e.preventDefault();
         if (validateProjectForm()) {
+            projectToArray();
             closeProjectModal();
         };
     });
     document.querySelector("#task-form-submit").addEventListener("click", (e) => {
         e.preventDefault();
         if (validateTaskForm()) {
+            taskToArray();
             closeTaskModal();
         };
     });
