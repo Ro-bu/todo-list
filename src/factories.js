@@ -14,10 +14,13 @@ class Project {
     addTask(task) {
         this.tasks.push(task);
     }
+    overWriteTasks(taskList) {
+        this.tasks = taskList;
+    }
 };
 
 class Task {
-    constructor(name, date = "No due date") {
+    constructor(name, date) {
         this.name = name;
         this.date = date;
         this.done = false;
