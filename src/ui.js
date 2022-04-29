@@ -3,6 +3,7 @@ import {add, compareAsc, parseISO} from "date-fns";
 
 const addProjectToUi = (obj) => {
     let parentLi = document.createElement("li");
+    parentLi.dataset.project = obj.name;
     let nameContainer = document.createElement("span");
     let taskCounter = document.createElement("span");
     let colorCircle = document.createElement("div");
@@ -114,7 +115,6 @@ const addWeeksTasks = () => {
     let weekFromNow = add(today, {
         days: 7
     });
-    console.log(weekFromNow);
     let projectArray = Storage.getData();
     projectArray.forEach((project) => {
         let taskColor = project.color;
@@ -140,4 +140,25 @@ const clearProjects = () => {
     };
 };
 
-export {addTodaysTasks, addWeeksTasks};
+const uiListeners = () => {
+    document.querySelectorAll(".project-container ul li").forEach((projectCont) => {
+        projectCont.addEventListener("click", (e) =>{
+            clearTasks();
+            addTasksFromProject(e.target.closest("li").dataset.project);
+        });
+    });
+    document.querySelector("#all-tasks").addEventListener("click", () => {
+        clearTasks();
+        addAllTasksToUi();
+    });
+    document.querySelector("#today-tasks").addEventListener("click", () => {
+        clearTasks();
+        addTodaysTasks();
+    });
+    document.querySelector("#week-tasks").addEventListener("click", () => {
+        clearTasks();
+        addWeeksTasks();
+    });
+};
+
+export {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners};
