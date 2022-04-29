@@ -13,10 +13,10 @@ class Project {
     }
     addTask(task) {
         this.tasks.push(task);
-    }
+    };
     overWriteTasks(taskList) {
         this.tasks = taskList;
-    }
+    };
 };
 
 class Task {

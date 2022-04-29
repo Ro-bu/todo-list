@@ -25,8 +25,10 @@ const addAllProjectsToUi = () => {
     };
 };
 
-const addTasktoUi = (obj, color) => {
+const addTasktoUi = (obj, color, projectIndex, taskIndex) => {
     let parentLi = document.createElement("li");
+    parentLi.dataset.projectIndex = projectIndex;
+    parentLi.dataset.taskIndex = taskIndex;
     let colorBlock = document.createElement("div");
     colorBlock.classList.add("color-block");
     colorBlock.style.backgroundColor = color;
@@ -74,11 +76,15 @@ const addTasktoUi = (obj, color) => {
 const addAllTasksToUi = () => {
     if (Storage.getData() !== null) {
         let projectArray = Storage.getData();
+        let projectIndex = 0;
         projectArray.forEach((project) => {
             let taskColor = project.color;
+            let taskIndex = 0;
             project.tasks.forEach((task) => {
-                addTasktoUi(task, taskColor);
+                addTasktoUi(task, taskColor, projectIndex, taskIndex);
+                taskIndex++;
             });
+            projectIndex++;
         });
     };
 };
@@ -86,13 +92,17 @@ const addAllTasksToUi = () => {
 const addTasksFromProject = (projectName) => {
     if (Storage.getData() !== null) {
         let projectArray = Storage.getData();
+        let projectIndex = 0;
         projectArray.forEach((project) => {
+            let taskIndex = 0;
             if(project.name === projectName) {
                 let taskColor = project.color;
                 project.tasks.forEach((task) => {
-                    addTasktoUi(task, taskColor);
+                    addTasktoUi(task, taskColor, projectIndex, taskIndex);
+                    taskIndex++;
                 }); 
             };
+            projectIndex++;
         });
     };
 };
@@ -100,13 +110,17 @@ const addTasksFromProject = (projectName) => {
 const addTodaysTasks = () => {
     let today = parseISO(new Date().toISOString().split("T")[0]);
     let projectArray = Storage.getData();
+    let projectIndex = 0;
     projectArray.forEach((project) => {
         let taskColor = project.color;
+        let taskIndex = 0;
         project.tasks.forEach((task) => {
             if (compareAsc(parseISO(task.date), today) === 0) {
-                addTasktoUi(task, taskColor);
+                addTasktoUi(task, taskColor, projectIndex, taskIndex);
             };
+            taskIndex++;
         });
+        projectIndex++;
     });
 };
 
@@ -116,13 +130,17 @@ const addWeeksTasks = () => {
         days: 7
     });
     let projectArray = Storage.getData();
+    let projectIndex = 0;
     projectArray.forEach((project) => {
         let taskColor = project.color;
+        let  taskIndex = 0;
         project.tasks.forEach((task) => {
             if (compareAsc(parseISO(task.date), weekFromNow) === -1) {
-                addTasktoUi(task, taskColor);
+                addTasktoUi(task, taskColor, projectIndex, taskIndex);
             };
+            taskIndex++;
         });
+        projectIndex++;
     });
 };
 
@@ -140,25 +158,36 @@ const clearProjects = () => {
     };
 };
 
+const refreshProjects = () => {
+    clearProjects();
+    addAllProjectsToUi();
+};
+
 const uiListeners = () => {
+    let taskListName = document.querySelector(".list-name");
     document.querySelectorAll(".project-container ul li").forEach((projectCont) => {
         projectCont.addEventListener("click", (e) =>{
             clearTasks();
+            taskListName.textContent = String(e.target.closest("li").dataset.project);
             addTasksFromProject(e.target.closest("li").dataset.project);
+
         });
     });
     document.querySelector("#all-tasks").addEventListener("click", () => {
         clearTasks();
+        taskListName.textContent = "ALL"
         addAllTasksToUi();
     });
     document.querySelector("#today-tasks").addEventListener("click", () => {
         clearTasks();
+        taskListName.textContent = "TODAY";
         addTodaysTasks();
     });
     document.querySelector("#week-tasks").addEventListener("click", () => {
         clearTasks();
+        taskListName.textContent = "WEEK";
         addWeeksTasks();
     });
 };
 
-export {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners};
+export {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners, refreshProjects};
