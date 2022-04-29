@@ -104,7 +104,7 @@ html {
     background-color: #e9742b;
 }
 .sidebar{
-    background-color: #e4e0d9;
+    background-color: #f1f0ed;
     grid-row: 2/3;
     grid-column: 1/2;
     display: flex;
@@ -131,7 +131,7 @@ html {
     cursor: pointer;
 }
 .sidebar-top li:hover{
-    background-color: #f0ede8;
+    background-color: #fdfafa;
     border-radius: 10px;
 }
 .sidebar-top li:last-child{
@@ -186,7 +186,7 @@ html {
     margin-left: 0.3rem;
 }
 .project-container li:hover{
-    background-color: #f0ede8;
+    background-color: #fdfafa;
     border-radius: 10px;
 }
 .project-container ul li div{
@@ -208,7 +208,7 @@ html {
     margin: 0 15px 0 5px;
 }
 .add-project:hover{
-    background-color: #f0ede8;
+    background-color: #fdfafa;
     border-radius: 10px;
 }
 .invisible{
