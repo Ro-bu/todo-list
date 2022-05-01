@@ -163,7 +163,7 @@ const refreshProjects = () => {
     addAllProjectsToUi();
 };
 
-const uiListeners = () => {
+const projectListeners = () => {
     let taskListName = document.querySelector(".list-name");
     document.querySelectorAll(".project-container ul li").forEach((projectCont) => {
         projectCont.addEventListener("click", (e) =>{
@@ -173,6 +173,9 @@ const uiListeners = () => {
 
         });
     });
+};
+
+const allTodayWeekListeners = () => {
     document.querySelector("#all-tasks").addEventListener("click", () => {
         clearTasks();
         taskListName.textContent = "ALL"
@@ -190,4 +193,25 @@ const uiListeners = () => {
     });
 };
 
-export {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners, refreshProjects};
+const toggleDoneListeners = () => {
+    document.querySelectorAll(".checkbox").forEach((checkbox) => {
+        checkbox.addEventListener("click", () => {
+            if(checkbox.classList.contains("checked")) {
+                checkbox.removeChild(checkbox.lastChild);
+            } else {
+                let checkboxImg = document.createElement("img");
+                checkboxImg.src = "./img/check.png";
+                checkbox.appendChild(checkboxImg);
+            };
+            checkbox.classList.toggle("checked");
+        });
+    });
+};
+
+const uiListeners = () => {
+    projectListeners();
+    allTodayWeekListeners();
+    toggleDoneListeners();
+};
+
+export {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners, refreshProjects, projectListeners};

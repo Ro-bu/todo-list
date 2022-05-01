@@ -1,7 +1,7 @@
 import {Task, Project} from "./factories.js";
 import {validateProjectForm, validateTaskForm, clearErrorMessages} from "./form-validators.js";
 import {Storage} from "./storage.js";
-import {refreshProjects} from "./ui.js";
+import {refreshProjects, projectListeners} from "./ui.js";
 
 const closeProjectModal = () => {
     document.querySelector("#project-modal").style.display = "none";
@@ -98,6 +98,7 @@ const modalListeners = () => {
         if (validateProjectForm()) {
             projectToArray();
             refreshProjects();
+            projectListeners();
             closeProjectModal();
         };
     });
