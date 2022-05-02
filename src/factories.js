@@ -20,10 +20,10 @@ class Project {
 };
 
 class Task {
-    constructor(name, date) {
+    constructor(name, date, done = false) {
         this.name = name;
         this.date = date;
-        this.done = false;
+        this.done = done;
     };
     newName(name) {
         this.name = name;

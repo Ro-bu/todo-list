@@ -8,9 +8,11 @@ const reconstructedProjectList = () => {
         let newProject = new Project(project.name, project.color);
         let taskList = project.tasks;
         taskList.forEach((task) => {
-            newProject.addTask(new Task(task.name, task.date));
+            newProject.addTask(new Task(task.name, task.date, task.done));
         });
         reconstructed.push(newProject);
     });
     return reconstructed;
 };
+
+export {reconstructedProjectList};

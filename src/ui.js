@@ -1,5 +1,6 @@
 import {Storage} from "./storage.js";
 import {add, compareAsc, parseISO} from "date-fns";
+import {reconstructedProjectList} from "./object-methods.js";
 
 const addProjectToUi = (obj) => {
     let parentLi = document.createElement("li");
@@ -40,6 +41,9 @@ const addTasktoUi = (obj, color, projectIndex, taskIndex) => {
     checkboxDiv.classList.add("checkbox");
     if (obj.done === true) {
         checkboxDiv.classList.add("checked");
+        let checkboxImg = document.createElement("img");
+        checkboxImg.src = "./img/check.png";
+        checkboxDiv.appendChild(checkboxImg);
     };
     let taskNameDiv = document.createElement("div");
     taskNameDiv.classList.add("task-name");
@@ -181,6 +185,7 @@ const allTodayWeekListeners = () => {
         clearTasks();
         taskListName.textContent = "ALL"
         addAllTasksToUi();
+        toggleDoneListeners();
     });
     document.querySelector("#today-tasks").addEventListener("click", () => {
         clearTasks();
@@ -204,10 +209,17 @@ const toggleDoneListeners = () => {
                 checkboxImg.src = "./img/check.png";
                 checkbox.appendChild(checkboxImg);
             };
+            let reconstructedProjectArray = reconstructedProjectList();
+            let projectIndex = parseInt(checkbox.parentElement.parentElement.parentElement.dataset.projectIndex);
+            let taskIndex = parseInt(checkbox.parentElement.parentElement.parentElement.dataset.taskIndex);
+            reconstructedProjectArray[projectIndex].tasks[taskIndex].toggleDone();
+            Storage.saveData(reconstructedProjectArray);
             checkbox.classList.toggle("checked");
         });
     });
 };
+
+
 
 const uiListeners = () => {
     projectListeners();
