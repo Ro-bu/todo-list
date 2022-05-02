@@ -191,7 +191,7 @@ const refreshCurrentTasks = () => {
             clearTasks();
             addTasksFromProject(currentTaskListName);
     };
-    toggleDoneListeners();
+    taskButtonListeners();
 };
 
 const projectListeners = () => {
@@ -201,7 +201,7 @@ const projectListeners = () => {
             clearTasks();
             taskListName.textContent = String(e.target.closest("li").dataset.project);
             addTasksFromProject(e.target.closest("li").dataset.project);
-            toggleDoneListeners();
+            taskButtonListeners();
         });
     });
 };
@@ -212,19 +212,19 @@ const allTodayWeekListeners = () => {
         clearTasks();
         taskListName.textContent = "ALL";
         addAllTasksToUi();
-        toggleDoneListeners();
+        taskButtonListeners();
     });
     document.querySelector("#today-tasks").addEventListener("click", () => {
         clearTasks();
         taskListName.textContent = "TODAY";
         addTodaysTasks();
-        toggleDoneListeners();
+        taskButtonListeners();
     });
     document.querySelector("#week-tasks").addEventListener("click", () => {
         clearTasks();
         taskListName.textContent = "WEEK";
         addWeeksTasks();
-        toggleDoneListeners();
+        taskButtonListeners();
     });
 };
 
@@ -248,12 +248,29 @@ const toggleDoneListeners = () => {
     });
 };
 
+const deleteButtonListeners = () => {
+    document.querySelectorAll(".date-and-edit span:last-child").forEach((button) => {
+        button.addEventListener("click", () => {
+            let reconstructedProjectArray = reconstructedProjectList();
+            let projectIndex = parseInt(button.parentElement.parentElement.parentElement.dataset.projectIndex);
+            let taskIndex = parseInt(button.parentElement.parentElement.parentElement.dataset.taskIndex);
+            reconstructedProjectArray[projectIndex].tasks.splice(taskIndex, 1);
+            Storage.saveData(reconstructedProjectArray);
+            refreshCurrentTasks();
+        });
+    });
+};
 
+const taskButtonListeners = () => {
+    toggleDoneListeners();
+    deleteButtonListeners();
+}
 
 const uiListeners = () => {
     projectListeners();
     allTodayWeekListeners();
-    toggleDoneListeners();
+    taskButtonListeners();
+    deleteButtonListeners();
 };
 
 export {addAllTasksToUi, addAllProjectsToUi, uiListeners, refreshProjects, projectListeners, refreshCurrentTasks};
