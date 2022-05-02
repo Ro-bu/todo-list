@@ -1,9 +1,8 @@
 import {modalListeners} from "./modal-controls.js";
-import {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners} from "./ui.js";
+import {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners, addAllTasksToUi} from "./ui.js";
 
 
 modalListeners();
-addTodaysTasks();
-addWeeksTasks();
+addAllTasksToUi();
 addAllProjectsToUi();
 uiListeners();

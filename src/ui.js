@@ -74,7 +74,12 @@ const addTasktoUi = (obj, color, projectIndex, taskIndex) => {
     trashButton.appendChild(trashImg);
     dateAndEditDiv.appendChild(editButton);
     dateAndEditDiv.appendChild(trashButton);
-    document.querySelector(".bot-content-block ul").appendChild(parentLi);
+    if(obj.done){
+        document.querySelector(".bot-content-block ul").append(parentLi);
+    } else {
+        document.querySelector(".bot-content-block ul").prepend(parentLi);
+
+    };
 };
 
 const addAllTasksToUi = () => {
@@ -167,6 +172,28 @@ const refreshProjects = () => {
     addAllProjectsToUi();
 };
 
+const refreshCurrentTasks = () => {
+    let currentTaskListName = document.querySelector(".list-name").textContent;
+    switch (currentTaskListName) {
+        case "ALL":
+            clearTasks();
+            addAllTasksToUi();
+            break;
+        case "TODAY":
+            clearTasks();
+            addTodaysTasks();
+            break;
+        case "WEEK":
+            clearTasks();
+            addWeeksTasks();
+            break;
+        default:
+            clearTasks();
+            addTasksFromProject(currentTaskListName);
+    };
+    toggleDoneListeners();
+};
+
 const projectListeners = () => {
     let taskListName = document.querySelector(".list-name");
     document.querySelectorAll(".project-container ul li").forEach((projectCont) => {
@@ -174,7 +201,7 @@ const projectListeners = () => {
             clearTasks();
             taskListName.textContent = String(e.target.closest("li").dataset.project);
             addTasksFromProject(e.target.closest("li").dataset.project);
-
+            toggleDoneListeners();
         });
     });
 };
@@ -183,7 +210,7 @@ const allTodayWeekListeners = () => {
     let taskListName = document.querySelector(".list-name");
     document.querySelector("#all-tasks").addEventListener("click", () => {
         clearTasks();
-        taskListName.textContent = "ALL"
+        taskListName.textContent = "ALL";
         addAllTasksToUi();
         toggleDoneListeners();
     });
@@ -191,11 +218,13 @@ const allTodayWeekListeners = () => {
         clearTasks();
         taskListName.textContent = "TODAY";
         addTodaysTasks();
+        toggleDoneListeners();
     });
     document.querySelector("#week-tasks").addEventListener("click", () => {
         clearTasks();
         taskListName.textContent = "WEEK";
         addWeeksTasks();
+        toggleDoneListeners();
     });
 };
 
@@ -227,4 +256,4 @@ const uiListeners = () => {
     toggleDoneListeners();
 };
 
-export {addTodaysTasks, addWeeksTasks, addAllProjectsToUi, uiListeners, refreshProjects, projectListeners};
+export {addAllTasksToUi, addAllProjectsToUi, uiListeners, refreshProjects, projectListeners, refreshCurrentTasks};
