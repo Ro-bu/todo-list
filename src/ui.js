@@ -135,7 +135,7 @@ const addWeeksTasks = () => {
         let taskColor = project.color;
         let  taskIndex = 0;
         project.tasks.forEach((task) => {
-            if (compareAsc(parseISO(task.date), weekFromNow) === -1) {
+            if (compareAsc(parseISO(task.date), weekFromNow) === -1 && compareAsc(parseISO(task.date), today) !== -1) {
                 addTasktoUi(task, taskColor, projectIndex, taskIndex);
             };
             taskIndex++;
@@ -176,6 +176,7 @@ const projectListeners = () => {
 };
 
 const allTodayWeekListeners = () => {
+    let taskListName = document.querySelector(".list-name");
     document.querySelector("#all-tasks").addEventListener("click", () => {
         clearTasks();
         taskListName.textContent = "ALL"
