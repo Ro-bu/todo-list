@@ -1,7 +1,7 @@
 import {Storage} from "./storage.js";
 import {add, compareAsc, parseISO} from "date-fns";
 import {reconstructedProjectList} from "./object-methods.js";
-import {taskEditButtonListeners} from "./modal-controls.js";
+import {taskEditButtonListeners, projectEditModal} from "./modal-controls.js";
 
 const addProjectToUi = (obj) => {
     let parentLi = document.createElement("li");
@@ -172,6 +172,7 @@ const clearProjects = () => {
 const refreshProjects = () => {
     clearProjects();
     addAllProjectsToUi();
+    projectListeners();
 };
 
 const refreshCurrentTasks = () => {
@@ -214,6 +215,37 @@ class HeaderEditDelete {
     };
 };
 
+const projectDeleteButton = () => {
+    let projectName = document.querySelector(".top-content-block h2").textContent;
+    let projectArray = Storage.getData();
+    let projectIndex = 0;
+    projectArray.forEach((project) => {
+        if (project.name === projectName) {
+            projectArray.splice(projectIndex, 1);
+        };
+        projectIndex++;
+    });
+    Storage.saveData(projectArray);
+};
+
+const projectEditDeleteListeners = () => {
+    let editButton = document.querySelector(".list-edit-delete span:first-child");
+    editButton.addEventListener("click", () => {
+        projectEditModal();
+    });
+    let deleteButton = document.querySelector(".list-edit-delete span:last-child");
+    deleteButton.addEventListener("click", () => {
+        projectDeleteButton();
+        clearTasks();
+        let taskListName = document.querySelector(".list-name");
+        taskListName.textContent = "ALL";
+        addAllTasksToUi();
+        taskButtonListeners();
+        HeaderEditDelete.clear();
+        refreshProjects();
+    });
+};
+
 const projectListeners = () => {
     let taskListName = document.querySelector(".list-name");
     document.querySelectorAll(".project-container ul li").forEach((projectCont) => {
@@ -224,6 +256,7 @@ const projectListeners = () => {
             taskButtonListeners();
             HeaderEditDelete.clear();
             HeaderEditDelete.add();
+            projectEditDeleteListeners();
         });
     });
 };

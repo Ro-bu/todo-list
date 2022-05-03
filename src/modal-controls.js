@@ -1,11 +1,14 @@
 import {Task, Project} from "./factories.js";
 import {validateProjectForm, validateTaskForm, clearErrorMessages} from "./form-validators.js";
 import {Storage} from "./storage.js";
-import {refreshProjects, projectListeners, refreshCurrentTasks} from "./ui.js";
+import {refreshProjects, refreshCurrentTasks} from "./ui.js";
 import {reconstructedProjectList} from "./object-methods.js";
 
 const closeProjectModal = () => {
     document.querySelector("#project-modal").style.display = "none";
+    let modalHeader = document.querySelector("#project-modal .modal-top span:first-child");
+    modalHeader.textContent = "ADD PROJECT";
+    document.querySelector("#project-form-submit").textContent = "Add Project";
 };
 const openProjectModal = () => {
     document.querySelector("#project-form").reset();
@@ -79,7 +82,36 @@ const projectsToFormOptions = () => {
 };
 
 const projectEditModal = () => {
-    
+    let projectName = document.querySelector(".top-content-block h2").textContent;
+    let projectArray = Storage.getData();
+    let projectIndex = 0;
+    projectArray.forEach((project) => {
+        if (project.name === projectName) {
+            openProjectModal();
+            let modalHeader = document.querySelector("#project-modal .modal-top span:first-child");
+            modalHeader.textContent = "EDIT PROJECT";
+            document.querySelector("#project-form-submit").textContent = "Edit Project";
+            let name = document.querySelector("#name");
+            let color = document.querySelector("#color");
+            name.value = projectName;
+            color.value = project.color;
+            modalHeader.dataset.projectIndex = projectIndex;
+        };
+        projectIndex++;
+    });
+};
+
+const projectEditSubmit = () => {
+    let reconstructedProjectArray = reconstructedProjectList();
+    let name = document.querySelector("#name");
+    let color = document.querySelector("#color");
+    let projectIndex = parseInt(document.querySelector("#project-modal .modal-top span:first-child").dataset.projectIndex);
+    reconstructedProjectArray[projectIndex].newName(name.value);
+    reconstructedProjectArray[projectIndex].newColor(color.value);
+    let taskListTitle = document.querySelector(".list-name");
+    taskListTitle.textContent = name.value;
+    Storage.saveData(reconstructedProjectArray);
+    delete document.querySelector("#project-modal .modal-top span:first-child").dataset.projectIndex;
 };
 
 const taskEditButtonListeners = () => {
@@ -148,10 +180,16 @@ const modalListeners = () => {
     document.querySelector("#project-form-submit").addEventListener("click", (e) => {
         e.preventDefault();
         if (validateProjectForm()) {
-            projectToArray();
-            refreshProjects();
-            projectListeners();
-            closeProjectModal();
+            if (document.querySelector("#project-modal .modal-top span:first-child").textContent === "EDIT PROJECT") {
+                projectEditSubmit();
+                refreshProjects();
+                refreshCurrentTasks();
+                closeProjectModal();
+            } else{
+                projectToArray();
+                refreshProjects();
+                closeProjectModal();
+            };
         };
     });
     document.querySelector("#task-form-submit").addEventListener("click", (e) => {
@@ -178,4 +216,4 @@ const modalListeners = () => {
     });
 };
 
-export {modalListeners, taskEditButtonListeners};
+export {modalListeners, taskEditButtonListeners, projectEditModal};
