@@ -1,6 +1,7 @@
 import {Storage} from "./storage.js";
 import {add, compareAsc, parseISO} from "date-fns";
 import {reconstructedProjectList} from "./object-methods.js";
+import {taskEditButtonListeners} from "./modal-controls.js";
 
 const addProjectToUi = (obj) => {
     let parentLi = document.createElement("li");
@@ -58,6 +59,7 @@ const addTasktoUi = (obj, color, projectIndex, taskIndex) => {
         dateDiv.textContent = obj.date;
     };
     let editButton = document.createElement("span");
+    editButton.classList.add("task-edit-button")
     let editImg = document.createElement("img");
     editImg.src = "./img/credit-card-edit.png";
     let trashButton = document.createElement("span");
@@ -74,7 +76,7 @@ const addTasktoUi = (obj, color, projectIndex, taskIndex) => {
     trashButton.appendChild(trashImg);
     dateAndEditDiv.appendChild(editButton);
     dateAndEditDiv.appendChild(trashButton);
-    if(obj.done){
+    if (obj.done) {
         document.querySelector(".bot-content-block ul").append(parentLi);
     } else {
         document.querySelector(".bot-content-block ul").prepend(parentLi);
@@ -104,12 +106,12 @@ const addTasksFromProject = (projectName) => {
         let projectIndex = 0;
         projectArray.forEach((project) => {
             let taskIndex = 0;
-            if(project.name === projectName) {
+            if (project.name === projectName) {
                 let taskColor = project.color;
                 project.tasks.forEach((task) => {
                     addTasktoUi(task, taskColor, projectIndex, taskIndex);
                     taskIndex++;
-                }); 
+                });
             };
             projectIndex++;
         });
@@ -142,7 +144,7 @@ const addWeeksTasks = () => {
     let projectIndex = 0;
     projectArray.forEach((project) => {
         let taskColor = project.color;
-        let  taskIndex = 0;
+        let taskIndex = 0;
         project.tasks.forEach((task) => {
             if (compareAsc(parseISO(task.date), weekFromNow) === -1 && compareAsc(parseISO(task.date), today) !== -1) {
                 addTasktoUi(task, taskColor, projectIndex, taskIndex);
@@ -194,14 +196,34 @@ const refreshCurrentTasks = () => {
     taskButtonListeners();
 };
 
+class HeaderEditDelete {
+    static add() {
+        let parentCont = document.querySelector(".list-edit-delete");
+        let editButton = document.createElement("span");
+        editButton.textContent = "Edit";
+        let deleteButton = document.createElement("span");
+        deleteButton.textContent = "Delete";
+        parentCont.append(editButton);
+        parentCont.append(deleteButton);
+    };
+    static clear() {
+        let parentCont = document.querySelector(".list-edit-delete");
+        while (parentCont.firstChild) {
+            parentCont.removeChild(parentCont.lastChild);
+        };
+    };
+};
+
 const projectListeners = () => {
     let taskListName = document.querySelector(".list-name");
     document.querySelectorAll(".project-container ul li").forEach((projectCont) => {
-        projectCont.addEventListener("click", (e) =>{
+        projectCont.addEventListener("click", (e) => {
             clearTasks();
             taskListName.textContent = String(e.target.closest("li").dataset.project);
             addTasksFromProject(e.target.closest("li").dataset.project);
             taskButtonListeners();
+            HeaderEditDelete.clear();
+            HeaderEditDelete.add();
         });
     });
 };
@@ -213,25 +235,28 @@ const allTodayWeekListeners = () => {
         taskListName.textContent = "ALL";
         addAllTasksToUi();
         taskButtonListeners();
+        HeaderEditDelete.clear();
     });
     document.querySelector("#today-tasks").addEventListener("click", () => {
         clearTasks();
         taskListName.textContent = "TODAY";
         addTodaysTasks();
         taskButtonListeners();
+        HeaderEditDelete.clear();
     });
     document.querySelector("#week-tasks").addEventListener("click", () => {
         clearTasks();
         taskListName.textContent = "WEEK";
         addWeeksTasks();
         taskButtonListeners();
+        HeaderEditDelete.clear();
     });
 };
 
 const toggleDoneListeners = () => {
     document.querySelectorAll(".checkbox").forEach((checkbox) => {
         checkbox.addEventListener("click", () => {
-            if(checkbox.classList.contains("checked")) {
+            if (checkbox.classList.contains("checked")) {
                 checkbox.removeChild(checkbox.lastChild);
             } else {
                 let checkboxImg = document.createElement("img");
@@ -264,7 +289,8 @@ const deleteButtonListeners = () => {
 const taskButtonListeners = () => {
     toggleDoneListeners();
     deleteButtonListeners();
-}
+    taskEditButtonListeners();
+};
 
 const uiListeners = () => {
     projectListeners();

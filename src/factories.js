@@ -1,4 +1,3 @@
-
 class Project {
     constructor(name, color) {
         this.name = name;
@@ -32,7 +31,7 @@ class Task {
         this.date = date;
     };
     toggleDone() {
-        if(this.done) {
+        if (this.done) {
             this.done = false;
         } else {
             this.done = true;

@@ -228,8 +228,12 @@ html {
     padding: 0.5rem;
     align-items: center;
 }
-.top-content-block span{
+.list-edit-delete{
     margin-left: auto;
+}
+.list-edit-delete span:last-child{
+    padding-left: 1rem;
+    color: red;
 }
 .top-content-block h2{
     font-size: 2rem;
