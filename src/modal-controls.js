@@ -46,6 +46,22 @@ const projectToArray = () => {
         Storage.saveData(projectArray);
     }
 };
+
+const projectFormSubmit = () => {
+    if (validateProjectForm()) {
+        if (document.querySelector("#project-modal .modal-top span:first-child").textContent === "EDIT PROJECT") {
+            projectEditSubmit();
+            refreshProjects();
+            refreshCurrentTasks();
+            closeProjectModal();
+        } else{
+            projectToArray();
+            refreshProjects();
+            closeProjectModal();
+        };
+    };
+};
+
 const modalToTask = () => {
     let title = document.querySelector("#task").value;
     let dueDate = document.querySelector("#dueDate").value;
@@ -62,6 +78,20 @@ const taskToArray = () => {
     });
     Storage.saveData(projectArray);
 };
+const taskFormSubmit = () => {
+    if (validateTaskForm()) {
+        if (document.querySelector("#task-modal .modal-top span:first-child").textContent === "EDIT TASK") {
+            taskEditSubmit();
+            closeTaskModal();
+            refreshCurrentTasks();
+        } else {
+            taskToArray();
+            closeTaskModal();
+            refreshCurrentTasks();
+        }
+    };
+};
+
 const clearFormOptions = () => {
     let parent = document.querySelector("#project");
     while (parent.firstChild) {
@@ -157,7 +187,24 @@ const taskEditSubmit = () => {
     };
 };
 
+const projectModalSubmitListener = () => {
+    document.querySelector("#project-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        projectFormSubmit();
+    });
+};
+
+const taskModalSubmitListener = () => {
+    document.querySelector("#task-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        taskFormSubmit();
+    });
+}
+
 const modalListeners = () => {
+    projectModalSubmitListener();
+    taskModalSubmitListener();
+
     document.querySelector("#task-modal-close").addEventListener("click", () => {
         closeTaskModal();
     });
@@ -179,32 +226,11 @@ const modalListeners = () => {
     });
     document.querySelector("#project-form-submit").addEventListener("click", (e) => {
         e.preventDefault();
-        if (validateProjectForm()) {
-            if (document.querySelector("#project-modal .modal-top span:first-child").textContent === "EDIT PROJECT") {
-                projectEditSubmit();
-                refreshProjects();
-                refreshCurrentTasks();
-                closeProjectModal();
-            } else{
-                projectToArray();
-                refreshProjects();
-                closeProjectModal();
-            };
-        };
+        projectFormSubmit();
     });
     document.querySelector("#task-form-submit").addEventListener("click", (e) => {
         e.preventDefault();
-        if (validateTaskForm()) {
-            if (document.querySelector("#task-modal .modal-top span:first-child").textContent === "EDIT TASK") {
-                taskEditSubmit();
-                closeTaskModal();
-                refreshCurrentTasks();
-            } else {
-                taskToArray();
-                closeTaskModal();
-                refreshCurrentTasks();
-            }
-        };
+        taskFormSubmit();
     });
     document.querySelector("#task-form-cancel").addEventListener("click", (e) => {
         e.preventDefault();
