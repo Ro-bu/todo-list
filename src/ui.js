@@ -7,14 +7,11 @@ const addProjectToUi = (obj) => {
     let parentLi = document.createElement("li");
     parentLi.dataset.project = obj.name;
     let nameContainer = document.createElement("span");
-    let taskCounter = document.createElement("span");
     let colorCircle = document.createElement("div");
-    taskCounter.textContent = "(0)";
     nameContainer.textContent = obj.name;
     colorCircle.style.backgroundColor = obj.color;
     parentLi.appendChild(colorCircle);
     parentLi.appendChild(nameContainer);
-    parentLi.appendChild(taskCounter);
     document.querySelector(".project-container ul").appendChild(parentLi);
 };
 
