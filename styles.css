@@ -180,11 +180,11 @@ html {
 .project-container ul li span{
     margin-left: 0.8rem;
 }
-.project-container ul li span:last-child{
+/* .project-container ul li span:last-child{
     color:#6d6660;
     font-size: 0.8rem;
     margin-left: 0.3rem;
-}
+} */
 .project-container li:hover{
     background-color: #fdfafa;
     border-radius: 10px;
