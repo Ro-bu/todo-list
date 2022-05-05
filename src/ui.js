@@ -316,6 +316,19 @@ const deleteButtonListeners = () => {
     });
 };
 
+const mobileDropdownListener = () => {
+    document.querySelector("#projects").addEventListener("click", () => {
+        if (document.querySelector("body").clientWidth <= 1000) {
+            document.querySelector(".project-container").classList.toggle("visible");
+        }
+    });
+    window.addEventListener("click", (e) => {
+        if (document.querySelector("body").clientWidth <= 1000 && !e.target.contains(document.querySelector(".project-container")) && !e.target.contains(document.querySelector("#projects"))) {
+            document.querySelector(".project-container").classList.remove("visible");
+        };
+    });
+};
+
 const taskButtonListeners = () => {
     toggleDoneListeners();
     deleteButtonListeners();
@@ -327,6 +340,7 @@ const uiListeners = () => {
     allTodayWeekListeners();
     taskButtonListeners();
     deleteButtonListeners();
+    mobileDropdownListener();
 };
 
 export {addAllTasksToUi, addAllProjectsToUi, uiListeners, refreshProjects, projectListeners, refreshCurrentTasks};
